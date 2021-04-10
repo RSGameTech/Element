@@ -9,6 +9,7 @@ import jishaku
 from discord.ext import commands, tasks
 from itertools import cycle
 from discoutils import MinimalEmbedHelp
+from keep_alive import keep_alive
 
 intents = discord.Intents.all()
 intents.members = True
@@ -52,5 +53,6 @@ if __name__ == '__main__':
             print(f"Error loading {extension}", file=sys.stderr)
             traceback.print_exc()
 
-bot.load_extension("jishaku")
-bot.run('NzkwODMyMjYzMjYwMDEyNTcz.X-GV8A.vRC6Mw1J3hD6p3ZyaP3bkSULc6g')
+keep_alive()
+bot.load_extension('jishaku')
+bot.run(os.getenv('Token'))
