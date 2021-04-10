@@ -23,16 +23,13 @@ class auto_mod(commands.Cog, name="Moderation"):
             )
             await message.channel.send(embed=IW)
         if "youtu.be/" in message.content or "youtube.com/" in message.content:
-            if message.author.id == 699566190842085439 or 456633518882160642:
-                return
-            else:
-                await message.delete()
-                SPW = discord.Embed(
-                    title=wr,
-                    description=f"{message.author.mention}, Stop doing self-promotion in this server :triumph:",
-                    color=0xFF0000
-                )
-                await message.channel.send(embed=SPW) 
+            await message.delete()
+            SPW = discord.Embed(
+                title=wr,
+                description=f"{message.author.mention}, Stop doing self-promotion in this server :triumph:",
+                color=0xFF0000
+            )
+            await message.channel.send(embed=SPW) 
         for word in filtered_words:
             if word in message.content:
                 await message.delete()
