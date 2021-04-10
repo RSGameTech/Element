@@ -58,7 +58,7 @@ async def change_status():
 
 bot.owner_ids=[699566190842085439, 730454267533459568]
 
-extentions = [
+extensions = [
     'cogs.moderation',
     'cogs.auto_mod',
     'cogs.animation',
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     for extension in extensions:
         try:
             bot.load_extension(extension)
-        except Excepton as e:
+        except Exception as e:
             print(f"Error loading {extension}", file=sys.stderr)
             traceback.print_exc()
 
