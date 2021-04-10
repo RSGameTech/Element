@@ -22,7 +22,7 @@ class auto_mod(commands.Cog, name="Moderation"):
                 color=0xFF0000
             )
             await message.channel.send(embed=IW)
-        if "youtu.be/" in message.content or "youtube.com/" in message.content:
+        elif "youtu.be/" in message.content or "youtube.com/" in message.content:
             await message.delete()
             SPW = discord.Embed(
                 title=wr,
