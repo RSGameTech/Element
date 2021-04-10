@@ -4,15 +4,15 @@ import sys
 import os
 import traceback
 import json
-#import discoutils
+import discoutils
 import jishaku
 from discord.ext import commands, tasks
 from itertools import cycle
-#from discoutils import MinimalEmbedHelp
+from discoutils import MinimalEmbedHelp
 
 intents = discord.Intents.all()
 intents.members = True
-bot = commands.Bot(command_prefix="--", intents=intents)    #, help_command=MinimalEmbedHelp()
+bot = commands.Bot(command_prefix="--", intents=intents, help_command=MinimalEmbedHelp())
 #bot.remove_command('help')
 status = cycle([discord.Game(name="Discord"),
 discord.Activity(type=discord.ActivityType.listening, name="RSGameTech"),
