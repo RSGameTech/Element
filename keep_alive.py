@@ -22,22 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
 
-import discord
-from discord.ext import commands
+from flask import Flask
+from threading import Thread
 
-class source(commands.Cog, name="Utility"):
-    def __init__(self,bot):
-        self.bot = bot
+app = Flask('')
 
-    @commands.command()
-    async def source(self, ctx):
-        embed = discord.Embed(
-            title="This BOT is open source",
-            description=f"[Click here](https://ritam0604.github.io/Element/)"
-        )
-        embed.set_footer(text=f"Requested by {ctx.author.name}",icon_url=ctx.author.avatar_url)
-        await ctx.send(embed=embed)
+@app.route('/')
+def home():
+    return "Hello. I am alive!"
 
-def setup(bot):
-    bot.add_cog(source(bot))
-    print("Source file is loaded!")
+def run():
+  app.run(host='0.0.0.0',port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
