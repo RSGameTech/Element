@@ -27,6 +27,9 @@ import random
 import asyncio
 from discord.ext import commands
 
+er = "Error"
+nt = "Note:-"
+nd = "[ ] -> Required\n( ) -> Optional"
 
 class fun(commands.Cog, name="Fun"):
     def __init__(self, bot):
