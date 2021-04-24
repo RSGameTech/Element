@@ -24,6 +24,7 @@ SOFTWARE.
 
 import discord
 import random
+import requests
 import asyncio
 from discord.ext import commands
 
@@ -35,8 +36,9 @@ class fun(commands.Cog, name="Fun"):
     def __init__(self, bot):
         self.bot = bot
 
-    #Q&A
+    #Simple
 
+    #Q&A
     @commands.command()
     async def qna(self, ctx, *, question):
         response = ["It is certain.",
@@ -67,7 +69,6 @@ class fun(commands.Cog, name="Fun"):
         await ctx.send(embed=embed)
 
     #F
-
     @commands.command()
     async def f(self, ctx, *, user: discord.Member = None):
         if user is None:
@@ -80,8 +81,9 @@ class fun(commands.Cog, name="Fun"):
             )
             await ctx.send(embed=embed)
 
-    #Hack
+    #Animation
 
+    #Hack
     @commands.command()
     async def hack(self, ctx, user: discord.Member = None):
         if user is ctx.message.author:
@@ -125,6 +127,74 @@ class fun(commands.Cog, name="Fun"):
             await m.edit(content=i)
         await asyncio.sleep(5)
         await ctx.send(f"{ctx.author.mention}, Discord Found you that you were Hacking others, so Discord decided that they will disable your account. Goodbye! :wave:")
+
+    #API
+
+    #Meme
+    @commands.command()
+    async def meme(self, ctx):
+        r = requests.get("https://memes.blademaker.tv/api/memes")
+        res = r.json()
+        title = res["title"]
+        ups = res["ups"]
+        downs = res["downs"]
+        sub = res["subreddit"]
+        author = res["author"]
+        embed = discord.Embed(
+            title=f"{title}\nAuthor: {author}\nSubreddit: {sub}",
+            description=f":+1: : {ups}, :-1: : {downs}",
+            color=0x00CCFF
+        )
+        embed.set_image(url=res["image"])
+        embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
+
+    #Font
+    @commands.command()
+    async def font(self, ctx, *, text):
+        font = ["1","2","3","4","5","6","7","8","9","10","11","12"]
+        f = requests.get(f"https://gdcolon.com/tools/gdfont/img/{text}?font={random.choice(font)}")
+        embed = discord.Embed(
+            colour=0x00CCFF
+        )
+        embed.set_image(url=f)
+        embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
+
+    #Change My Mind
+    @commands.command(aliases=['cmm'])
+    async def changemymind(self, ctx, *, text):
+        c = requests.get(f"https://nekobot.xyz/api/imagegen?type=changemymind&text={text}").json()
+        url = c["message"]
+        await ctx.send(url)
+
+    #Threats
+    @commands.command(aliases=['t'])
+    async def threats(self, ctx, user: discord.Member = None):
+        user = user or ctx.author
+        t = requests.get(f"https://nekobot.xyz/api/imagegen?type=threats&url={user.avatar_url}").json()
+        url = t["message"]
+        embed = discord.Embed(
+            title="Threats",
+            colour=0x00CCFF
+        )
+        embed.set_image(url=url)
+        embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
+
+    #iPhone
+    @commands.command()
+    async def iphone(self, ctx, user: discord.Member = None):
+        user = user or ctx.author
+        i = requests.get(f"https://nekobot.xyz/api/imagegen?type=iphonex&url={user.avatar_url}").json()
+        url = i["message"]
+        embed = discord.Embed(
+            title="iPhone",
+            colour=0x00CCFF
+        )
+        embed.set_image(url=url)
+        embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(fun(bot))

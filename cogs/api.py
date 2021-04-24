@@ -35,40 +35,8 @@ nd = "[ ] -> Required\n( ) -> Optional"
 class api(commands.Cog, name="API"):
     def __init__(self, bot):
         self.bot = bot
-
-    #Meme
-
-    @commands.command()
-    async def meme(self, ctx):
-        r = requests.get("https://memes.blademaker.tv/api/memes")
-        res = r.json()
-        title = res["title"]
-        ups = res["ups"]
-        downs = res["downs"]
-        sub = res["subreddit"]
-        author = res["author"]
-        embed = discord.Embed(
-            title=f"{title}\nAuthor: {author}\nSubreddit: {sub}",
-            description=f":+1: : {ups}, :-1: : {downs}",
-            color=0x00CCFF
-        )
-        embed.set_image(url=res["image"])
-        embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar_url)
-        await ctx.send(embed=embed)
     
-    #Font
 
-    @commands.command()
-    async def font(self, ctx, *, text):
-        font = ["1","2","3","4","5","6","7","8","9","10","11","12"]
-        e = text.replace(' ','%20')
-        f = f"https://gdcolon.com/tools/gdfont/img/{e}?font={random.choice(font)}"
-        embed = discord.Embed(
-            color=0x00CCFF
-        )
-        embed.set_image(url=f)
-        embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar_url)
-        await ctx.send(embed=embed)
 
     #Wasted
 
@@ -78,7 +46,7 @@ class api(commands.Cog, name="API"):
             E1 = discord.Embed(
                 title=er,
                 description="Please mention the name that you want to `Wasted`",
-                color=0xFF0000
+                colour=0xFF0000
             )
             E1.add_field(name="Usage", value="--wasted [member]")
             E1.add_field(name=nt, value=nd)
@@ -103,9 +71,7 @@ class api(commands.Cog, name="API"):
 
     @commands.command()
     async def say(self, ctx, *, text):
-        e = text.replace(' ','%20')
-        m = ctx.author.name.replace(' ','%20')
-        s = f"https://gdcolon.com/tools/gdtextbox/img/{e}?color=blue&name={m}&char=scratch"
+        s = requests.get(f"https://gdcolon.com/tools/gdtextbox/img/{text}?color=blue&name={ctx.author.name}&char=scratch")
         await ctx.send(s)
 
     #Comment
