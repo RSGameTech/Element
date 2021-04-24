@@ -60,7 +60,6 @@ bot.owner_ids=[699566190842085439, 730454267533459568]
 
 extensions = [
     'cogs.moderation',
-    'cogs.auto_mod',
     'cogs.animation',
     'cogs.fun',
     'cogs.event',
