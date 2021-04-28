@@ -34,8 +34,7 @@ class util(commands.Cog, name="Utility"):
 
     @commands.command()
     async def user_av(self, ctx, *, user: discord.Member = None):
-        if user is None:
-            user = ctx.message.author
+        user = user or ctx.author
         embed = discord.Embed()
         embed.add_field(name=user.name,value=f"[Download]({user.avatar_url})")
         embed.set_image(url=user.avatar_url)
